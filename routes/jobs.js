@@ -8,8 +8,8 @@ const express = require("express");
 const { BadRequestError } = require("../expressError");
 const { ensureAdmin, ensureCorrectUserOrAdmin } = require("../middleware/auth");
 const Job = require("../models/job");
-// const jobNewSchema = require("../schemas/jobNew.json");
-// const jobUpdateSchema = require("../schemas/jobUpdate.json");
+const jobNewSchema = require("../schemas/jobNew.json");
+const jobUpdateSchema = require("../schemas/jobUpdate.json");
 const jobSearchSchema = require("../schemas/jobSearch.json");
 const User = require("../models/user");
 
@@ -113,22 +113,7 @@ router.patch("/:id", ensureAdmin, async function (req, res, next) {
   }
 });
 
-/* POST /[username]/jobs/[id]
 
-Returns {"applied: jobId"}
-
-Authorization required: admin or logged in user username same as :username 
-*/
-
-router.post("/username/jobs/:id", ensureCorrectUserOrAdmin, async function (req,res, next){
-  try{
-    const jobId = +req.params.id;
-    await User.applyToJob(req.params.username, jobId);
-    return res.json({applied: jobId});
-  } catch (err){
-    return next(err);
-  }
-})
 
 
 /** DELETE /[handle]  =>  { deleted: id }

@@ -71,7 +71,7 @@ describe("POST /auth/token", function () {
   });
 });
 
-/************************************** POST /auth/register */
+// /************************************** POST /auth/register */
 
 describe("POST /auth/register", function () {
   test("works for anon", async function () {
